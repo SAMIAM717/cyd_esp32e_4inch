@@ -1,0 +1,8 @@
+{
+  "name": "Bad_Usb_Lib",
+  "version": "0.0.1",
+  "description": "Bad USB BLE keyboard helper for Bruce project",
+  "dependencies": [
+    { "name": "NimBLE-Arduino", "version": "^1.4.0" }
+  ]
+}

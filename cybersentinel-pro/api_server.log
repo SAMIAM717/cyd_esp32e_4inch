@@ -1,0 +1,49 @@
+/home/adam/Downloads/Bruce-main/cybersentinel-pro/api_server.py:65: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [159016]
+INFO:     Waiting for application startup.
+No OpenAI API key provided. AI analysis will be limited.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+🚀 Starting CyberSentinel Pro API Server...
+INFO:     127.0.0.1:40294 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40300 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40312 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42958 - "POST /config/openai HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60100 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60100 - "OPTIONS /scan/network HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60112 - "POST /scan/network HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44710 - "OPTIONS /scan/status/network_1761169667.841129 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44714 - "GET /scan/status/network_1761169667.841129 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36190 - "OPTIONS /scan/web HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36198 - "POST /scan/web HTTP/1.1" 200 OK
+SSL analysis failed: [Errno -2] Name or service not known
+INFO:     127.0.0.1:36210 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:36224 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:36226 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:36232 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:36236 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50104 - "OPTIONS /scan/status/web_1761169711.106232 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50110 - "GET /scan/status/web_1761169711.106232 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39728 - "OPTIONS /ai/analyze HTTP/1.1" 200 OK
+OpenAI API call failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+INFO:     127.0.0.1:39736 - "POST /ai/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46378 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [159016]

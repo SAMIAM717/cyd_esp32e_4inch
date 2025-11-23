@@ -1,0 +1,6 @@
+# 4MB flash with maximized single OTA app partition (no OTA updates planned)
+# Name,     Type, SubType,   Offset,    Size,     Flags
+nvs,        data, nvs,       0x9000,    0x6000,
+app0,       app,  ota_0,     0x10000,   0x3B0000,
+spiffs,     data, spiffs,    0x3C0000,  0x30000,
+coredump,   data, coredump,  0x3F0000,  0x10000,

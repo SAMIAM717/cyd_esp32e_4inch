@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+python-multipart
+requests
+pydantic
+python-nmap
+beautifulsoup4
+scapy
+openai
+psutil
+cryptography
+urllib3
