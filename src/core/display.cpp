@@ -6,6 +6,10 @@
 #include "utils.h"
 #include <JPEGDecoder.h>
 #include <interface.h> //for charging ischarging to print charging indicator
+#include <algorithm>
+
+extern volatile int tftWidth;
+extern volatile int tftHeight;
 
 #define MAX_MENU_SIZE (int)(tftHeight / 25)
 
@@ -58,24 +62,38 @@ void displayScrollingText(const String &text, Opt_Coord &coord) {
 ** Description:   Draw touch screen footer
 ***************************************************************************************/
 void TouchFooter(uint16_t color) {
-    tft.drawRoundRect(5, tftHeight + 2, tftWidth - 10, 43, 5, color);
+    int footerHeight = std::max(30, tftHeight / 4);
+    int footerTop = std::max(0, tftHeight - footerHeight);
+    int innerHeight = std::max(0, footerHeight - 4);
+    int textY = footerTop + (footerHeight - (FG * LH)) / 2;
+    if (textY < footerTop + 4) textY = footerTop + 4;
+
+    tft.fillRect(6, footerTop + 1, tftWidth - 12, innerHeight, bruceConfig.bgColor);
+    tft.drawRoundRect(5, footerTop, tftWidth - 10, std::max(2, footerHeight - 2), 5, color);
     tft.setTextColor(color);
-    tft.setTextSize(FM);
-    tft.drawCentreString("PREV", tftWidth / 6, tftHeight + 4, 1);
-    tft.drawCentreString("SEL", tftWidth / 2, tftHeight + 4, 1);
-    tft.drawCentreString("NEXT", 5 * tftWidth / 6, tftHeight + 4, 1);
+    tft.setTextSize(FG); // Larger text size for better visibility
+    tft.drawCentreString("PREV", tftWidth / 6, textY, 1);
+    tft.drawCentreString("SEL", tftWidth / 2, textY, 1);
+    tft.drawCentreString("NEXT", 5 * tftWidth / 6, textY, 1);
 }
 /***************************************************************************************
 ** Function name: TouchFooter
 ** Description:   Draw touch screen footer
 ***************************************************************************************/
 void MegaFooter(uint16_t color) {
-    tft.drawRoundRect(5, tftHeight + 2, tftWidth - 10, 43, 5, color);
+    int footerHeight = std::max(40, tftHeight / 4);
+    int footerTop = std::max(0, tftHeight - footerHeight);
+    int innerHeight = std::max(0, footerHeight - 4);
+    int textY = footerTop + (footerHeight - (FM * LH)) / 2;
+    if (textY < footerTop + 4) textY = footerTop + 4;
+
+    tft.fillRect(6, footerTop + 1, tftWidth - 12, innerHeight, bruceConfig.bgColor);
+    tft.drawRoundRect(5, footerTop, tftWidth - 10, std::max(2, footerHeight - 2), 5, color);
     tft.setTextColor(color);
     tft.setTextSize(FM);
-    tft.drawCentreString("Exit", tftWidth / 6, tftHeight + 4, 1);
-    tft.drawCentreString("UP", tftWidth / 2, tftHeight + 4, 1);
-    tft.drawCentreString("DOWN", 5 * tftWidth / 6, tftHeight + 4, 1);
+    tft.drawCentreString("Exit", tftWidth / 6, textY, 1);
+    tft.drawCentreString("UP", tftWidth / 2, textY, 1);
+    tft.drawCentreString("DOWN", 5 * tftWidth / 6, textY, 1);
 }
 
 /***************************************************************************************

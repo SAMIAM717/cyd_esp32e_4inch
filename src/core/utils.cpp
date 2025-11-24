@@ -2,6 +2,7 @@
 #include "core/wifi/wifi_common.h" //to return MAC addr
 #include "scrollableTextArea.h"
 #include <globals.h>
+#include <algorithm>
 
 /*********************************************************************
 **  Function: backToMenu
@@ -124,14 +125,18 @@ void showDeviceInfo() {
 void touchHeatMap(struct TouchPoint t) {
     int third_x = tftWidth / 3;
     int third_y = tftHeight / 3;
+    int footerHeight = std::max(1, tftHeight / 4);
+    int bottom_button_threshold = tftHeight - footerHeight;
 
-    if (t.x > third_x * 0 && t.x < third_x * 1 && t.y > third_y) PrevPress = true;
-    if (t.x > third_x * 1 && t.x < third_x * 2 && ((t.y > third_y && t.y < third_y * 2) || t.y > tftHeight))
-        SelPress = true;
-    if (t.x > third_x * 2 && t.x < third_x * 3) NextPress = true;
+    // Bottom navigation buttons - bottom quarter of the screen
+    if (t.x > third_x * 0 && t.x < third_x * 1 && t.y > bottom_button_threshold) PrevPress = true;
+    if (t.x > third_x * 1 && t.x < third_x * 2 && t.y > bottom_button_threshold) SelPress = true;
+    if (t.x > third_x * 2 && t.x < third_x * 3 && t.y > bottom_button_threshold) NextPress = true;
+
+    // Upper area buttons - keep original behavior
     if (t.x > third_x * 0 && t.x < third_x * 1 && t.y < third_y) EscPress = true;
     if (t.x > third_x * 1 && t.x < third_x * 2 && t.y < third_y) UpPress = true;
-    if (t.x > third_x * 1 && t.x < third_x * 2 && t.y > third_y * 2 && t.y < third_y * 3) DownPress = true;
+    if (t.x > third_x * 1 && t.x < third_x * 2 && t.y > third_y * 2 && t.y < bottom_button_threshold) DownPress = true;
     /*
                         Touch area Map
                 ________________________________ 0
@@ -141,7 +146,7 @@ void touchHeatMap(struct TouchPoint t) {
                 |         |_________|  Next   |_> third_y*2
                 |  Prev   |  Down   |         |
                 |_________|_________|_________|_> third_y*3
-                |__Prev___|___Sel___|__Next___| 20 pixel touch area where the touchFooter is drawn
+                |__Prev___|___Sel___|__Next___| Bottom footer area (25% of the screen)
                 0         L third_x |         |
                                     Lthird_x*2|
                                               Lthird_x*3

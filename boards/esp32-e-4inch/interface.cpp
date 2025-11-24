@@ -101,8 +101,18 @@ void InputHandler(void) {
             if (!wakeUpScreen()) AnyKeyPress = true;
             else return;
 
-            touchPoint.x = constrain(p.x, 0, tftWidth);
-            touchPoint.y = constrain(p.y, 0, tftHeight);
+            // Align the library-scaled coordinates with our logical screen size.
+            const int32_t rawWidth = (bruceConfig.rotation % 2 == 0) ? TFT_HEIGHT : TFT_WIDTH;
+            const int32_t rawHeight = (bruceConfig.rotation % 2 == 0) ? TFT_WIDTH : TFT_HEIGHT;
+            int32_t scaledX = (rawWidth > 0) ? (int32_t)p.x * tftWidth / rawWidth : p.x;
+            int32_t scaledY = (rawHeight > 0) ? (int32_t)p.y * tftHeight / rawHeight : p.y;
+
+            // Invert coordinates
+            scaledX = tftWidth - scaledX;
+            scaledY = tftHeight - scaledY;
+
+            touchPoint.x = constrain(scaledX, 0, tftWidth);
+            touchPoint.y = constrain(scaledY, 0, tftHeight);
             touchPoint.pressed = true;
             touchHeatMap(touchPoint);
         } else {
