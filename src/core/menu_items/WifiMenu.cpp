@@ -63,6 +63,7 @@ void WifiMenu::optionsMenu() {
         if (WiFi.getMode() == WIFI_MODE_STA) options.push_back({"AP info", displayAPInfo});
     }
     options.push_back({"Wifi Atks", wifi_atk_menu});
+    options.push_back({"Marauder+/Ghost", [](){ marauderAdvancedMenu(); }});
     options.push_back({"Evil Portal", [=]() {
                            if (isWebUIActive || server) {
                                stopWebUi();
@@ -78,7 +79,6 @@ void WifiMenu::optionsMenu() {
     options.push_back({"SSH", lambdaHelper(ssh_setup, String(""))});
     options.push_back({"Sniffers", [=]() {
         std::vector<Option> snifferOptions;
-    options.push_back({"Marauder+/Ghost", [](){ marauderAdvancedMenu(); }});
 
 
             snifferOptions.push_back({"Raw Sniffer",    sniffer_setup});
