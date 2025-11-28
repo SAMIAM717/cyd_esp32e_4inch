@@ -31,6 +31,7 @@
 // 32bit: https://github.com/9dl/Bruce-C2/releases/download/v1.0/BruceC2_windows_386.exe
 // 64bit: https://github.com/9dl/Bruce-C2/releases/download/v1.0/BruceC2_windows_amd64.exe
 #include "modules/wifi/tcp_utils.h"
+#include "modules/marauder/marauder_advanced.h"
 
 void WifiMenu::optionsMenu() {
     returnToMenu = false;
@@ -77,6 +78,7 @@ void WifiMenu::optionsMenu() {
     options.push_back({"SSH", lambdaHelper(ssh_setup, String(""))});
     options.push_back({"Sniffers", [=]() {
         std::vector<Option> snifferOptions;
+    options.push_back({"Marauder+/Ghost", [](){ marauderAdvancedMenu(); }});
 
 
             snifferOptions.push_back({"Raw Sniffer",    sniffer_setup});
